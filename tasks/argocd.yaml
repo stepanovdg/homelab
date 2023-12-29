@@ -41,9 +41,6 @@ tasks:
     ignore_error: true
 
   repo:
-    vars:
-      GIT_URI:
-        sh: git config --get remote.origin.url | sed -e 's/:/\//g'| sed -e 's/ssh\/\/\///g'| sed -e 's/git@/https:\/\//g' | sed 's/.git$//'
     cmds:
     - rm config/repo.yaml
     - |
@@ -58,8 +55,6 @@ tasks:
       stringData:
         type: git
         url: https://github.com/stepanovdg/homelab.git
-        password: $GH_PASS
-        username: $GH_USER
       EOF
     - |
       kubectl apply -f - << EOF
@@ -72,9 +67,7 @@ tasks:
           argocd.argoproj.io/secret-type: repository
       stringData:
         type: git
-        url: https://github.com/stepanovdg/private.git
-        password: $GH_PASS
-        username: $GH_USER
+        url: https://github.com/stepanovdg/helm-values.git
       EOF
     ignore_error: true
 

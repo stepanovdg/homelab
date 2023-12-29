@@ -13,6 +13,7 @@ resources:
   - base/core/argocd.yaml
   - base/core/data.yaml
   - base/core/networking.yaml
+  - base/core/services.yaml
   - base/core/utilities.yaml
 
   # Applications
