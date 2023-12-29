@@ -8,7 +8,7 @@ resources:
   - base/projects/monitoring.yaml
   - base/projects/networking.yaml
   - base/projects/apps.yaml
-  -
+
   # Core apps
   - base/core/argocd.yaml
   - base/core/data.yaml
