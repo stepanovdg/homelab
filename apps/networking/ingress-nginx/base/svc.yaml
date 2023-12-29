@@ -9,7 +9,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "1"
     io.cilium/lb-ipam-ips: "10.44.0.10"
-  name: ingress-nginx-controller-vip
+  name: ingress-nginx-controller
 spec:
   ipFamilyPolicy: SingleStack
   ipFamilies:
