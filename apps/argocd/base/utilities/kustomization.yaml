@@ -3,6 +3,10 @@ kind: Kustomization
 
 resources:
 - snapshot.yaml
+- descheduler.yaml
+- kube-fledged.yaml
+- reflector.yaml
+- reloader.yaml
 - sealed.yaml
 
 namespace: argocd
