@@ -16,7 +16,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: grafana-internal-vip
+  name: grafana-internal
   annotations: []
   labels:
     app.kubernetes.io/instance: kube-prometheus
