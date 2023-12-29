@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="550" height="100" src="https://raw.githubusercontent.com/stepanovdg/homelab/main/docs/assets/logos/cloudnative.png" />
+  <img width="550" height="100" src="https://raw.githubusercontent.com/stepanovdg/homelab/master/docs/assets/logos/cloudnative.png" />
   <br />
   <img src="https://img.shields.io/github/v/release/cloudnative-pg/cloudnative-pg?label=Latest%20Version&logo=github&style=for-the-badge" />
 </p>
@@ -32,6 +32,6 @@ kubectl apply -k github.com/stepanovdg/homelab/apps/data/postgres/cloudnative
 ```
 
 [github-uri]: https://github.com/stepanovdg/homelab
-[argo-uri]: https://github.com/stepanovdg/homelab/tree/main/apps/argocd
-[example-uri]: https://github.com/stepanovdg/homelab/blob/main/apps/services/n8n/base/db.yaml
+[argo-uri]: https://github.com/stepanovdg/homelab/tree/master/apps/argocd
+[example-uri]: https://github.com/stepanovdg/homelab/blob/master/apps/services/n8n/base/db.yaml
 [docs-uri]: https://postgres-operator.readthedocs.io/en/latest/

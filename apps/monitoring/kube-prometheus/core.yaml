@@ -830,7 +830,7 @@ spec:
         https://github.com/prometheus-operator/kube-prometheus
     - name: 'Chart location:'
       value: >-
-        https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack
+        https://github.com/prometheus-community/helm-charts/tree/master/charts/kube-prometheus-stack
     - name: 'Official Website:'
       value: >-
         https://prometheus-operator.dev/

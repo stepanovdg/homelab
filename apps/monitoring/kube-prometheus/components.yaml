@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: 'https://github.com/stepanovdg/homelab.git'
     path: apps/monitoring/kube-prometheus/base
-    targetRevision: main
+    targetRevision: master
   destination:
     namespace: monitoring
     name: in-cluster

@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img width="236" height="236" src="https://raw.githubusercontent.com/stepanovdg/homelab/main/docs/assets/logos/certmanager.svg" />
+  <img width="236" height="236" src="https://raw.githubusercontent.com/stepanovdg/homelab/master/docs/assets/logos/certmanager.svg" />
   <br />
   <img src="https://img.shields.io/github/v/release/kubernetes-sigs/external-dns?label=Latest%20Version&logo=github&style=for-the-badge" />
 </p>
@@ -26,7 +26,7 @@
 ### Instructions for standalone deployment (**Requires ArgoCD**)
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/stepanovdg/homelab/main/apps/argocd/base/networking/cert-manager.yaml -n argocd
+kubectl apply -f https://raw.githubusercontent.com/stepanovdg/homelab/master/apps/argocd/base/networking/cert-manager.yaml -n argocd
 ```
 
 &nbsp;
@@ -54,7 +54,7 @@ kubectl apply -f https://raw.githubusercontent.com/stepanovdg/homelab/main/apps/
 [docs-uri]: https://cert-manager.io/docs/
 [helm-uri]: https://github.com/cert-manager/cert-manager/tree/master/deploy/charts/cert-manager
 [manifests-uri]: https://github.com/cert-manager/cert-manager/tree/master/deploy/manifests
-[argocd-file]: https://github.com/stepanovdg/homelab/blob/main/apps/argocd/base/networking/external-dns/cloudflare.yaml
+[argocd-file]: https://github.com/stepanovdg/homelab/blob/master/apps/argocd/base/networking/external-dns/cloudflare.yaml
 [tracking-error-explain]: https://foxutech.medium.com/how-to-fix-too-long-must-have-at-most-262144-bytes-in-argocd-2a00cddbbe99
 [tracking-error-explain-2]: https://www.arthurkoziel.com/fixing-argocd-crd-too-long-error/
 [original-github-crd-issue]: https://github.com/argoproj/argo-cd/issues/820
