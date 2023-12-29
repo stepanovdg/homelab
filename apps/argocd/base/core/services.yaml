@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: 'https://github.com/stepanovdg/homelab.git'
     path: apps/argocd/base/services
-    targetRevision: main
+    targetRevision: master
   destination:
     namespace: services
     name: in-cluster
