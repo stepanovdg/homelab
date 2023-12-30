@@ -27,7 +27,6 @@ resources:
   - base/cmp-plugin.yaml
   - base/repo-role.yaml
   - base/repo-rb.yaml
-
   - https://raw.githubusercontent.com/argoproj/argo-cd/v2.9.3/manifests/install.yaml
   - base/styles-cm.yaml
 
