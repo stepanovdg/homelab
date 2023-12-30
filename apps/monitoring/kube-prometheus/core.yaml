@@ -504,12 +504,6 @@ spec:
             minAvailable: 1
           prometheusSpec:
             additionalScrapeConfigs:
-            - job_name: unifipoller
-              metrics_path: /metrics
-              scrape_interval: 30s
-              static_configs:
-              - targets:
-                - unifi-poller-svc.unifi.svc.cluster.local:9130
             - authorization:
                 credentials: <path:kv/data/ha#auth-token>
               job_name: hass
@@ -518,7 +512,7 @@ spec:
               scrape_interval: 60s
               static_configs:
               - targets:
-                - homeassistant.homeassistant.svc.cluster.local:80
+                - 10.5.5.5:8123
             - job_name: grafana-image-rendering-service
               static_configs:
               - targets:
@@ -530,15 +524,6 @@ spec:
                 - argocd-metrics.argocd.svc.cluster.local:8082
                 - argocd-server-metrics.argocd.svc.cluster.local:8083
                 - argocd-repo-server.argocd.svc.cluster.local:8084
-            - job_name: 'uptime'
-              scrape_interval: 30s
-              scheme: http
-              static_configs:
-                - targets:
-                  - kuma-internal.monitoring.svc.cluster.local:80
-              basic_auth:
-                username: <path:kv/data/kuma#username>
-                password: <path:kv/data/kuma#password>
             allowOverlappingBlocks: false
             arbitraryFSAccessThroughSMs: false
             disableCompaction: false
