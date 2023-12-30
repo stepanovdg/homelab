@@ -68,7 +68,7 @@ patches:
       kind: Deployment
       name: argocd-server
   - patch: |-
-      - op: delete
+      - op: remove
     target:
       kind: NetworkPolicy
   - path: overlay/argocd-svc.yaml
