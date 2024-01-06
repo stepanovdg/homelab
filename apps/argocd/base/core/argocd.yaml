@@ -12,8 +12,6 @@ spec:
     repoURL: 'https://github.com/stepanovdg/homelab.git'
     path: apps/argocd
     targetRevision: master
-    directory:
-      recurse: false
   destination:
     namespace: argocd
     name: in-cluster
