@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
 - homepage.yaml
 
-namespace: sevices
+namespace: services
 
 commonLabels:
   app.kubernetes.io/category: services
