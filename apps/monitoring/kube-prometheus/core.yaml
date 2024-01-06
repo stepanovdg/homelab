@@ -6,7 +6,7 @@ spec:
   project: monitoring
   source:
     repoURL: 'https://github.com/prometheus-community/helm-charts.git'
-    targetRevision: kube-prometheus-stack-48.3.1
+    targetRevision: kube-prometheus-stack-55.6.0
     path: charts/kube-prometheus-stack
     helm:
       releaseName: kube-prometheus
@@ -176,14 +176,6 @@ spec:
               providers:
               - disableDeletion: true
                 editable: true
-                folder: unifi
-                name: unifi
-                options:
-                  path: /var/lib/grafana/dashboards/unifi
-                orgId: 1
-                type: file
-              - disableDeletion: true
-                editable: true
                 folder: services
                 name: services
                 options:
@@ -302,31 +294,6 @@ spec:
                 datasource: Prometheus
                 gnetId: 12485
                 revision: 1
-            unifi:
-              unifiPollerClientDPI:
-                datasource: Prometheus
-                gnetId: 11310
-                revision: 5
-              unifiPollerClientInsights:
-                datasource: Prometheus
-                gnetId: 11315
-                revision: 9
-              unifiPollerNetworkSites:
-                datasource: Prometheus
-                gnetId: 11311
-                revision: 5
-              unifiPollerUAPInsights:
-                datasource: Prometheus
-                gnetId: 11314
-                revision: 10
-              unifiPollerUSGInsights:
-                datasource: Prometheus
-                gnetId: 11313
-                revision: 9
-              unifiPollerUSWInsights:
-                datasource: Prometheus
-                gnetId: 11312
-                revision: 9
           defaultDashboardsEnabled: true
           defaultDashboardsTimezone: America/Sao_Paulo
           enabled: true
