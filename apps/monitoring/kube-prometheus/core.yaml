@@ -169,7 +169,7 @@ spec:
             createAggregateClusterRoles: false
             pspEnabled: false
         grafana:
-          adminPassword: <path:kv/data/kube-prometheus#grafana-admin-password>
+          adminPassword: "<path:kv/data/kube-prometheus#grafana-admin-password>"
           dashboardProviders:
             dashboardproviders.yaml:
               apiVersion: 1
