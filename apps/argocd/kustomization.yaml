@@ -1,71 +1,76 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-resources:
   # ArgoCD Projects
-  - base/projects/core.yaml
-  - base/projects/cluster.yaml
-  - base/projects/monitoring.yaml
-  - base/projects/networking.yaml
-  - base/projects/apps.yaml
 
   # Core apps
-  - base/core/argocd.yaml
-  - base/core/data.yaml
-  - base/core/networking.yaml
-  - base/core/services.yaml
-  - base/core/utilities.yaml
 
   # Applications
-  - base/apps/vault.yaml
 
   # Monitoring
-  - base/monitoring/kube-prometheus.yaml
-  - base/monitoring/grafana.yaml
 
   # ArgoCD
-  - base/cmp-plugin.yaml
-  - base/repo-role.yaml
-  - base/repo-rb.yaml
-  - https://raw.githubusercontent.com/argoproj/argo-cd/v2.9.3/manifests/install.yaml
-  - base/styles-cm.yaml
+resources:
+- base/projects/core.yaml
+- base/projects/cluster.yaml
+- base/projects/monitoring.yaml
+- base/projects/networking.yaml
+- base/projects/apps.yaml
+- base/core/argocd.yaml
+- base/core/data.yaml
+- base/core/networking.yaml
+- base/core/services.yaml
+- base/core/utilities.yaml
+- base/apps/vault.yaml
+- base/monitoring/kube-prometheus.yaml
+- base/monitoring/grafana.yaml
+- base/cmp-plugin.yaml
+- base/repo-role.yaml
+- base/repo-rb.yaml
+- https://raw.githubusercontent.com/argoproj/argo-cd/v2.9.3/manifests/install.yaml
+- base/styles-cm.yaml
 
 namespace: argocd
 images:
-  - name: quay.io/argoproj/argocd
-    newTag: v2.9.3
+- name: quay.io/argoproj/argocd
+  newTag: v2.9.3
 patches:
-  - patch: |-
-      - op: replace
-        path: "/metadata/namespace"
-        value: "monitoring"
-    target:
-      kind: ServiceMonitor
-  - patch: |-
-      - op: add
-        path: "/spec/strategy"
-        value:
-          type: "Recreate"
-      - op: replace
-        path: "/spec/template/spec/serviceAccountName"
-        value: "argocd-server"
-    target:
-      kind: Deployment
-      name: argocd-server
-  - patch: |-
-      - op: add
-        path: "/spec/template/spec/containers/0/args/-"
-        value: "--insecure"
-    target:
-      kind: Deployment
-      name: argocd-server
-  - path: overlay/argocd-network-policy.yaml
-  - path: overlay/argocd-svc.yaml
-  - path: overlay/argocd-deployment.yaml
-  - path: overlay/argocd-repo-deployment.yaml
-  - path: overlay/argocd-cm.yaml
-  - path: overlay/argocd-rbac.yaml
-  - path: overlay/argocd-cr.yaml
+- patch: |-
+    - op: replace
+      path: "/metadata/namespace"
+      value: "monitoring"
+  target:
+    kind: ServiceMonitor
+- patch: |-
+    - op: add
+      path: "/spec/strategy"
+      value:
+        type: "Recreate"
+    - op: replace
+      path: "/spec/template/spec/serviceAccountName"
+      value: "argocd-server"
+  target:
+    kind: Deployment
+    name: argocd-server
+- patch: |-
+    - op: add
+      path: "/spec/template/spec/containers/0/args/-"
+      value: "--insecure"
+  target:
+    kind: Deployment
+    name: argocd-server
+- path: overlay/rm-network-policy/controller.yaml
+- path: overlay/rm-network-policy/dex.yaml
+- path: overlay/rm-network-policy/notification-controller.yaml
+- path: overlay/rm-network-policy/redis.yaml
+- path: overlay/rm-network-policy/repo.yaml
+- path: overlay/rm-network-policy/server.yaml
+- path: overlay/rm-network-policy/set-controller.yaml
+- path: overlay/argocd-svc.yaml
+- path: overlay/argocd-deployment.yaml
+- path: overlay/argocd-repo-deployment.yaml
+- path: overlay/argocd-cm.yaml
+- path: overlay/argocd-rbac.yaml
+- path: overlay/argocd-cr.yaml
 commonAnnotations:
   reloader.stakater.com/auto: "true"
-
