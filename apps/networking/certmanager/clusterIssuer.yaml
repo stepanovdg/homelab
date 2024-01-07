@@ -11,7 +11,8 @@ spec:
       name: letsencrypt-production
     solvers:
     - selector:
-        dnsNames:
+        dnsZones:
+        - 'stepanovs.dev'
         - '*.stepanovs.dev'
       dns01:
         digitalocean:
