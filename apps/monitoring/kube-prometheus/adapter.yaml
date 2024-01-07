@@ -1,0 +1,54 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-prometheus-adapter
+spec:
+  project: monitoring
+  source:
+    repoURL: 'https://github.com/prometheus-community/helm-charts.git'
+    targetRevision: prometheus-adapter-4.9.0
+    path: charts/prometheus-adapter
+    helm:
+      releaseName: prometheus-adapter
+      values: |
+        prometheus:
+          url: http://kube-prometheus-kube-prome-prometheus.monitoring.svc
+          port: 9090
+  destination:
+    namespace: monitoring
+    name: in-cluster
+  info:
+    - name: 'Github Repository:'
+      value: >-
+        https://github.com/prometheus-operator/kube-prometheus
+    - name: 'Chart location:'
+      value: >-
+        https://github.com/prometheus-community/helm-charts/tree/master/charts/prometheus-adapter
+    - name: 'Official Website:'
+      value: >-
+        https://prometheus-operator.dev/
+    - name: 'Documentation:'
+      value: >-
+        https://prometheus-operator.dev/docs/prologue/introduction/
+    - name: 'k3s useful documentation:'
+      value: >-
+        https://picluster.ricsanfre.com/docs/prometheus/#k3s-components-monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+    - Validate=false
+    - CreateNamespace=false
+    - ServerSideApply=true
+    - PrunePropagationPolicy=foreground
+    - PruneLast=true
+    - ApplyOutOfSyncOnly=false
+    - Prune=true
+    retry:
+      limit: 15
+      backoff:
+        duration: 15s
+        factor: 2
+        maxDuration: 20m
