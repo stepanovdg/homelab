@@ -1,46 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: plex
+  name: jellyfin
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: apps
   source:
-#    repoURL: https://github.com/truecharts/charts
-    repoURL: https://github.com/truenas/charts/tree/master/charts/plex
-    chart: plex
-    targetRevision: 1.7.59
-#    targetRevision: 16.1.5
+    repoURL: https://github.com/truenas/charts/tree/master/community/jellyfin
+    chart: jellyfin
+    targetRevision: 1.2.6
     helm:
-      releaseName: plex
+      releaseName: jellyfin
       values: |
-        appVolumeMounts:
-          config:
-            hostPath: /mnt/Utility/Media/config/plex
-            hostPathEnabled: true
-            mountPath: /config
-          data:
-            hostPath: /mnt/Utility/Media/data
-            hostPathEnabled: true
-            mountPath: /data
-          shared:
-            emptyDir: true
-            mountPath: /shared
-          shared-logs:
-            emptyDir: true
-            mountPath: /config/Library/Application Support/Plex Media Server/Logs
-          transcode:
-            hostPath: /mnt/Utility/Media/transcode
-            hostPathEnabled: true
-            mountPath: /transcode
-        claimToken: claim-gsUJsH-A-9v8MwzQUCm8
-        dnsConfig:
-          options: []
-        enablePlexPass: true
-        enableResourceLimits: false
-        environmentVariables: []
-        extraAppVolumeMounts: []
         global:
           ixChartContext:
             addNvidiaRuntimeClass: false
@@ -58,17 +30,12 @@ spec:
             nvidiaRuntimeClassName: nvidia
             operation: INSTALL
             smbProvisioner: smb.csi.k8s.io
-            storageClassName: ix-storage-class-plex
+            storageClassName: ix-storage-class-jellyfin
             upgradeMetadata: {}
-        gpuConfiguration:
-          amd.com/gpu: 0
-          gpu.intel.com/i915: 0
-          nvidia.com/gpu: 0
-        hostNetwork: true
         image:
           pullPolicy: IfNotPresent
-          repository: plexinc/pms-docker
-          tag: 1.32.8.7639-fb6452ebf
+          repository: jellyfin/jellyfin
+          tag: 10.8.13
         ixCertificateAuthorities: {}
         ixCertificates: {}
         ixChartContext:
@@ -87,20 +54,60 @@ spec:
           nvidiaRuntimeClassName: nvidia
           operation: INSTALL
           smbProvisioner: smb.csi.k8s.io
-          storageClassName: ix-storage-class-plex
+          storageClassName: ix-storage-class-jellyfin
           upgradeMetadata: {}
         ixExternalInterfacesConfiguration: []
         ixExternalInterfacesConfigurationNames: []
         ixVolumes: []
-        plexServiceTCP:
-          port: 32400
-        plexpassImage:
-          pullPolicy: IfNotPresent
-          repository: plexinc/pms-docker
-          tag: plexpass
-        release_name: plex
-        timezone: America/Los_Angeles
-        updateStrategy: Recreate
+        jellyfinConfig:
+          additionalEnvs: []
+          publishServerUrl: ""
+          publishedServerUrl: ""
+        jellyfinGPU:
+          amd.com/gpu: 0
+          gpu.intel.com/i915: 0
+          nvidia.com/gpu: 0
+        jellyfinNetwork:
+          hostNetwork: true
+          webPort: 30013
+        jellyfinRunAs:
+          group: 1000
+          user: 1000
+        jellyfinStorage:
+          additionalStorages:
+            - hostPathConfig:
+                aclEnable: false
+                hostPath: /mnt/Utility/Media/data
+              mountPath: /media
+              readOnly: false
+              type: hostPath
+          cache:
+            hostPathConfig:
+              aclEnable: false
+              hostPath: /mnt/Utility/Media/config/jellyfin/cache
+            ixVolumeConfig:
+              datasetName: cache
+            type: hostPath
+          config:
+            hostPathConfig:
+              aclEnable: false
+              hostPath: /mnt/Utility/Media/config/jellyfin
+            ixVolumeConfig:
+              datasetName: config
+            type: hostPath
+          transcodes:
+            hostPathConfig:
+              aclEnable: false
+              hostPath: /mnt/Utility/Media/transcode
+            ixVolumeConfig:
+              datasetName: transcodes
+            type: hostPath
+        release_name: jellyfin
+        resources:
+          limits:
+            cpu: 4000m
+            memory: 8Gi
+
   destination:
     namespace: media
     name: in-cluster

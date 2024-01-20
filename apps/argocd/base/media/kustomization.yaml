@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
 - plex_helm.yaml
+- jellyfin_helm.yaml
 #- jellyfin.yaml
 
 namespace: media
