@@ -29,6 +29,7 @@ resources:
 - base/repo-rb.yaml
 - https://raw.githubusercontent.com/argoproj/argo-cd/v2.9.3/manifests/install.yaml
 - base/styles-cm.yaml
+- base/apps/media.yaml
 
 namespace: argocd
 images:
