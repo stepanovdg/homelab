@@ -13,7 +13,7 @@ spec:
     targetRevision: master
   destination:
     namespace: media
-    name: truenas
+    name: in-cluster
   syncPolicy:
     automated:
       prune: true
