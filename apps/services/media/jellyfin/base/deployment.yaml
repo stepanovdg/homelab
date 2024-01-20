@@ -1,0 +1,71 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyfin
+  labels:
+    app: jellyfin
+  annotations:
+    link.argocd.argoproj.io/external-link: https://tv.gruber.dev.br
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: jellyfin
+  template:
+    metadata:
+      labels:
+        app: jellyfin
+    spec:
+      runtimeClassName: nvidia
+      containers:
+        - name: jellyfin
+          image: ghcr.io/hotio/jellyfin:release-10.8.10-1
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: jellyfin-cm
+          ports:
+            - name: http
+              containerPort: 8096
+              protocol: TCP
+            - name: https
+              containerPort: 8920
+              protocol: TCP
+            - name: discovery
+              containerPort: 7359
+              protocol: UDP
+            - name: dnla
+              containerPort: 1900
+              protocol: UDP
+          securityContext:
+            allowPrivilegeEscalation: true
+          resources:
+            requests:
+              cpu: 850m
+              memory: 2048Mi
+            limits:
+              cpu: 1500m
+              memory: 4096Mi
+          volumeMounts:
+            - name: movies
+              mountPath: /movies
+            - name: anime
+              mountPath: /anime
+            - name: config
+              mountPath: /config
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: jellyfin-storage
+        - name: movies
+          persistentVolumeClaim:
+            claimName: movie-library
+        - name: anime
+          persistentVolumeClaim:
+            claimName: anime-library
+        - name: cache
+          persistentVolumeClaim:
+            claimName: jellyfin-cache
