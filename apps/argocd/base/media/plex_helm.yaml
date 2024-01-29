@@ -111,7 +111,7 @@ spec:
       allowEmpty: false
     syncOptions:
       - Validate=false
-      - CreateNamespace=false
+      - CreateNamespace=true
       - PrunePropagationPolicy=foreground
       - ServerSideApply=true
       - ApplyOutOfSyncOnly=false
