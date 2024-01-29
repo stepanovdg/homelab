@@ -110,7 +110,7 @@ spec:
 
   destination:
     namespace: media
-    name: in-cluster
+    name: truenas
   syncPolicy:
     automated:
       prune: true
